@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.0.1/rti_dds_topic_types.xsd">
+
+	<include file="CommonTypes.xml"/>
+	<include file="DDSCommonTypes.xml"/>
+	
+	<module name="Atlas_dds_types">
+
+		<struct name="AtlasFusedEntityReportType">
+			<!--VRF entity marking text-->
+			<member name="unitName" stringMaxLength="-1" type="string" key="true"/>
+			<!--HLA entity enumaration -->
+			<member name="unitEnumaration" stringMaxLength="-1" type="string"/>
+			<!--Current time in UTC-->
+			<member name="timestamp" type="nonBasic" nonBasicTypeName="common_types::UTCTimeType"/>
+			<!--VRF geodetic location (LLA)-->
+			<member name="worldLocation" type="nonBasic"  nonBasicTypeName= "gw_dds_types::LLAPointType"/>
+			<!--VRF entity pitch, roll  , yaw-->
+			<member name="attitude" type="nonBasic"  nonBasicTypeName= "gw_dds_types::PitchRollYawType"/>
+			<!--force classification - e.g. opposing-->
+			<member name="hostility" type="nonBasic" nonBasicTypeName="gw_dds_types::HostilityType"/>
+			<!--The entity classification-->
+			<member name="classification" type="nonBasic" nonBasicTypeName="gw_dds_types::ClassificationType"/>
+			<!--Unit damage state-->
+			<member name="entityDamageState" type="nonBasic" nonBasicTypeName="gw_dds_types::EntityStateType"/>
+			<!--VRF geocentric velocity (XYZ)-->
+			<member name="velocity" type="nonBasic"  nonBasicTypeName= "gw_dds_types::ENUType"/>
+			<member name="posture" type="nonBasic" nonBasicTypeName="gw_dds_types::PostureEnum"/>
+			<member name="weaponStatus" type="nonBasic" nonBasicTypeName="common_types::OrientationType"/>
+			<member name="skeleton" type="nonBasic" nonBasicTypeName="common_types::SkeletonType" optional="true"/>
+		</struct>
+	</module>
+</types>

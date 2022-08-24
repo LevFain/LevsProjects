@@ -1,0 +1,32 @@
+{
+     "Server1": {
+          "Command": "AttackCommand",
+          "IP": "127.0.0.1",
+          "PORT": "9999"
+     },
+     "Server2": {
+          "Command": "EntityPosture",
+          "IP": "127.0.0.1",
+          "PORT": "9998"
+     },
+     "Server3": {
+          "Command": "AtlasFusedEntityReport",
+          "IP": "127.0.0.1",
+          "PORT": "9997"
+     },
+     "Server4": {
+          "Command": "AttackReport",
+          "IP": "127.0.0.1",
+          "PORT": "9996"
+     },
+     "Server5": {
+          "Command": "No command assigned",
+          "IP": "127.0.0.1",
+          "PORT": "9995"
+     },
+     "Server6": {
+          "Command": "No command assigned",
+          "IP": "127.0.0.1",
+          "PORT": "9994"
+     }
+}

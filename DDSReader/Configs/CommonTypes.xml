@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.0.1/rti_dds_topic_types.xsd">
+	<module name="common_types">
+		<enum name="PostureEnum">
+			<enumerator name="STANDING" value="1"/>
+			<enumerator name="KNEELING" value="4"/>
+			<enumerator name="PRONE" value="5"/>
+		</enum>
+
+		<enum name="EntityStateEnum">
+			<enumerator name="KILL" value="0"/>
+			<enumerator name="ALIVE" value="1"/>
+		</enum>
+		
+		<struct name= "LLAPointType" nested="true">
+			<!-- Units: Degrees-->
+			<member name="latitude" type="float64" min="-90.0" max="90.0"/>
+			<!-- Units: Degrees-->
+			<member name="longitude" type="float64" min="-180.0" max="180.0"/>
+			<!-- Units: Meter, Above sea-level altitude-->
+			<member name="altitude" type="float64"/>
+		</struct>
+
+		<struct name ="OrientationType" nested="true">
+			<!--Units: Degrees-->
+			<member name="azimuth" type="float64" min="0" max="360.0"/>
+			<!--Units: Degrees-->
+			<member name="elevation" type="float64" min="-90.0" max="90.0"/>
+		</struct>
+
+		<struct name="RPYType" nested="true">
+			<member name="pitch" type="float64" min="-90.0" max="90"/>
+			<member name="roll" type="float64" min="-180.0" max="180"/>
+			<member name="yaw" type="float64" min="-180.0" max="180"/>
+		</struct>
+
+		<struct name="UTCTimeType" nested="true">
+			<member name="seconds" type="int64"/>
+			<member name="nanoseconds" type="int64"/>
+		</struct>
+		
+		<struct name="IdentifierType" nested="true">
+			<member name="platformId" stringMaxLength="-1" type="string"/>
+			<member name="systemId" stringMaxLength="-1" type="string"/>
+			<member name="moduleId" type="int64"/>
+		</struct>
+				
+		<typedef name="entityName" stringMaxLength="-1" type="string"/>
+		<typedef name="counterID" type="uint64"/>
+		<typedef name="imageType" stringMaxLength="-1" type="string"/>
+
+		<!-- Body coordinates -->
+		<struct name="Cartesian3DPoint" nested="true">
+			<!-- positive x pointing forward-->
+			<member name="x" type="float64"/>
+			<!-- positive y pointing right-->
+			<member name="y" type="float64"/>
+			<!-- positive z pointing down-->
+			<member name="z" type="float64"/>
+		</struct>
+
+		<struct name="Cartesian3DPointWithConfidenceType">
+			<member name="position" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPoint"/>
+			<member name="confidence_level" type="int32" min="0" max="100"/>
+		</struct>
+
+		<struct name="SkeletonType">
+			<member name="Nose" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LEye" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="REye" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LEar" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="REar" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LShoulder" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="RShoulder" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LElbow" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="RElbow" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LWrist" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="RWrist" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LHip" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="RHip" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LKnee" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="Rknee" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="LAnkle" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+			<member name="RAnkle" type="nonBasic" nonBasicTypeName="common_types::Cartesian3DPointWithConfidenceType"/>
+		</struct>
+	</module>
+</types>
