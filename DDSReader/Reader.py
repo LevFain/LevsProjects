@@ -1,17 +1,13 @@
-import logging
 import DDSDefs as Dds
+import ConfigManager as config
 
-
-logger = logging.getLogger('main')
 dds_topics = ['AtlasFusedEntityReport','EntityPosture', 'AttackReport', 'AttackCommand', 'ScenarioStatus']
 dds_connector = Dds.Publisher(dds_topics)
 
-
-print('Version 1.0.2 - 15/08/22')
-print('Starting Application')
-print('Connecting to ' + str(dds_topics))
+print('Connecting to topics:\n')
+print(str(dds_topics)+'\n')
+config.loading()
 print('Connected, waiting for Scenario Play')
-
 
 while True:
 	try:
