@@ -1,0 +1,25 @@
+//06-08-22
+	+Added ScenarioStatus funcionality (app works accoring to scenario state)
+
+//07-08-22
+	-Removed unnecessary lines
+	+Refactored the struct of each json the gets sent out
+
+//08-08-22
+	+Added more Types to send in EntityReport (hostility, weapons_name, entity_state, pitch roll)
+
+//09-08-22
+	+Reorganized dicts
+
+//15-08-22
+	+Redesigned the Config and refactored ConfigManager
+
+//21-08-22
+	+Added GtTypes, can support Atlas now
+	+Changed EntityReport to AtlasFusedEntityReport
+	
+//23-08-22
+	+Added the ability to change the config via CMD
+	+Added config changer application
+
+
