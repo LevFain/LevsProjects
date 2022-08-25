@@ -6,7 +6,6 @@ from time import sleep
 def loading(num):
     for i in range(num):
         if i <= i:
-            # arrows = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙']
             arrows = ['[----]','[=---]','[-=--]','[--=-]','[---=]','[----]','      ']
             for arrow in arrows:
                 print("                            "+arrow,end='\r')
