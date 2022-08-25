@@ -1,21 +1,42 @@
-import json
 import os
 import sys
+import json
 from time import sleep
+
+def loading():
+    # ← ↖ ↑ ↗ → ↘ ↓ ↙
+    print("                              ↑", end="\r")
+    sleep(0.05)
+    print("                              ↗", end="\r")
+    sleep(0.05)
+    print("                              →", end="\r")
+    sleep(0.05)
+    print("                              ↘", end="\r")
+    sleep(0.05)
+    print("                              ↓", end="\r")
+    sleep(0.05)
+    print("                              ↙", end="\r")
+    sleep(0.05)
+    print("                              ←", end="\r")
+    sleep(0.05)
+    print("                              ↖", end="\r")
+    sleep(0.05)
+    print("                              ↑", end="\r")
+
+if not 'tabulate' or not 'rticonnextdds_connector' in sys.modules.keys():
+    os.system('pip install tabulate -q -q -q')
+    os.system('pip install rticonnextdds_connector -q -q -q')# installs modules that are not present 
+
 from tabulate import tabulate
 
 
 print('\n')
-print('                   Version 1.0.8 - 24/08/22                   '+'\n')
+print('                   Version 1.0.9 - 25/08/22                   '+'\n')
 print('                       Starting Config                        '+'\n')
+loading()
+loading()
 
-# this checks if the necessary modules are installed, if not, installs them
-modules=['tabulate','rticonnextdds_connector'] # modules to check
-for module in modules:
-    if module in sys.modules:
-        continue
-    else:
-        os.system("pip install "+module) # installs modules that are not present 
+# this checks if the necessary modules are installed, if not, installs the
 
 with open('./Configs/Config.json', 'r') as configFile:
     config_data = json.load(configFile)
@@ -28,30 +49,9 @@ Server5 = config_data['Server5']
 Server6 = config_data['Server6']
 
 
-def loading():
-    # ← ↖ ↑ ↗ → ↘ ↓ ↙
-    print("↑", end="\r")
-    sleep(0.05)
-    print("↗", end="\r")
-    sleep(0.05)
-    print("→", end="\r")
-    sleep(0.05)
-    print("↘", end="\r")
-    sleep(0.05)
-    print("↓", end="\r")
-    sleep(0.05)
-    print("↙", end="\r")
-    sleep(0.05)
-    print("←", end="\r")
-    sleep(0.05)
-    print("↖", end="\r")
-    sleep(0.05)
-    print("↑", end="\r")
-
-
-loading()
-loading()
 print('                   Current list of servers                        '+'\n')
+loading()
+loading()
 print(tabulate([['Server 1', Server1['IP'],Server1['PORT'],Server1['Command']],
                 ['Server 2', Server2['IP'],Server2['PORT'],Server2['Command']],
                 ['Server 3', Server3['IP'],Server3['PORT'],Server3['Command']],
