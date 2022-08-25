@@ -3,25 +3,14 @@ import sys
 import json
 from time import sleep
 
-def loading():
-    # ← ↖ ↑ ↗ → ↘ ↓ ↙
-    print("                              ↑", end="\r")
-    sleep(0.05)
-    print("                              ↗", end="\r")
-    sleep(0.05)
-    print("                              →", end="\r")
-    sleep(0.05)
-    print("                              ↘", end="\r")
-    sleep(0.05)
-    print("                              ↓", end="\r")
-    sleep(0.05)
-    print("                              ↙", end="\r")
-    sleep(0.05)
-    print("                              ←", end="\r")
-    sleep(0.05)
-    print("                              ↖", end="\r")
-    sleep(0.05)
-    print("                              ↑", end="\r")
+def loading(num):
+    for i in range(num):
+        if i <= i:
+            # arrows = ['←', '↖', '↑', '↗', '→', '↘', '↓', '↙']
+            arrows = ['[----]','[=---]','[-=--]','[--=-]','[---=]','[----]','      ']
+            for arrow in arrows:
+                print("                            "+arrow,end='\r')
+                sleep(0.05)
 
 if not 'tabulate' or not 'rticonnextdds_connector' in sys.modules.keys():
     os.system('pip install tabulate -q -q -q')
@@ -30,11 +19,10 @@ if not 'tabulate' or not 'rticonnextdds_connector' in sys.modules.keys():
 from tabulate import tabulate
 
 
-print('\n')
-print('                   Version 1.0.9 - 25/08/22                   '+'\n')
+
+print('\n                   Version 1.0.9 - 25/08/22                   '+'\n')
 print('                       Starting Config                        '+'\n')
-loading()
-loading()
+loading(2)
 
 # this checks if the necessary modules are installed, if not, installs the
 
@@ -50,8 +38,7 @@ Server6 = config_data['Server6']
 
 
 print('                   Current list of servers                        '+'\n')
-loading()
-loading()
+loading(2)
 print(tabulate([['Server 1', Server1['IP'],Server1['PORT'],Server1['Command']],
                 ['Server 2', Server2['IP'],Server2['PORT'],Server2['Command']],
                 ['Server 3', Server3['IP'],Server3['PORT'],Server3['Command']],
