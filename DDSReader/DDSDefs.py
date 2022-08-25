@@ -1,10 +1,9 @@
-import os
 import rticonnextdds_connector as rti
 import json
 import socket
-from time import sleep
-from os import path as os_path
 import ConfigManager
+from os import path as os_path
+
 
 # this setting is needed for more than 15 connectors in application
 rti.Connector.set_max_objects_per_thread(4096)
@@ -98,9 +97,9 @@ class Publisher(object):
                     }
                 }
         jcommand = json.dumps(command, indent=2)
-        print(jcommand)
+        print('\n'+jcommand, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jcommand, "utf-8"), (ConfigManager.Server1['IP'], int(ConfigManager.Server1['PORT'])))
+        sock.sendto(bytes('\n'+jcommand, "utf-8"), (ConfigManager.Server1['IP'], int(ConfigManager.Server1['PORT'])))
 
 
     def GetEntityPosture(self):
@@ -123,9 +122,9 @@ class Publisher(object):
                 }
             }
         jcommand = json.dumps(command, indent=2)
-        print(jcommand)
+        print('\n'+jcommand, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jcommand, "utf-8"), (ConfigManager.Server2['IP'], int(ConfigManager.Server2['PORT'])))
+        sock.sendto(bytes('\n'+jcommand, "utf-8"), (ConfigManager.Server2['IP'], int(ConfigManager.Server2['PORT'])))
 
     def GetAtlasReport(self):
         try:
@@ -156,9 +155,9 @@ class Publisher(object):
                     }
                 }
         jreport = json.dumps(report, indent=2)
-        print(jreport)
+        print('\n'+jreport, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jreport, "utf-8"), (ConfigManager.Server3['IP'], int(ConfigManager.Server3['PORT'])))
+        sock.sendto(bytes('\n'+jreport, "utf-8"), (ConfigManager.Server3['IP'], int(ConfigManager.Server3['PORT'])))
 
     def GetAttackReport(self):
         try:
@@ -182,9 +181,9 @@ class Publisher(object):
                         }
                     }
         jreport = json.dumps(report, indent=2)
-        print(jreport)
+        print('\n'+jreport, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jreport, "utf-8"), (ConfigManager.Server4['IP'], int(ConfigManager.Server4['PORT'])))
+        sock.sendto(bytes('\n'+jreport, "utf-8"), (ConfigManager.Server4['IP'], int(ConfigManager.Server4['PORT'])))
 
     def start(self):
         # self.GetScenarioStatus()

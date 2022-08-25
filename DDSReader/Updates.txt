@@ -17,7 +17,8 @@
 //21-08-22
 	+Added GtTypes, can support Atlas now
 	+Changed EntityReport to AtlasFusedEntityReport
-	
+	+Changed the way that the participant is read in DDSDefs.py
+
 //23-08-22
 	+Added the ability to change the config via CMD
 	+Added config changer application
