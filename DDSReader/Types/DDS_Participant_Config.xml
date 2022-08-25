@@ -81,7 +81,7 @@
   </types>
 
   <domain_library name="Reader_Domain_Library">
-    <domain domain_id="0" name="Attack_Domain">
+    <domain domain_id="1" name="Attack_Domain">
       <register_type name="gw_dds_types::AttackCommand" type_ref="gw_dds_types::AttackCommand"/>
       <register_type name="gw_dds_types::AttackReportType" type_ref="gw_dds_types::AttackReportType"/>
       

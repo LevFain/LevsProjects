@@ -1,29 +1,29 @@
-import os
 import rticonnextdds_connector as rti
 import json
 import socket
-from time import sleep
-from os import path as os_path
 import ConfigManager
+from os import path as os_path
+
 
 # this setting is needed for more than 15 connectors in application
 rti.Connector.set_max_objects_per_thread(4096)
 
 
-dds_topics =  { 'AtlasFusedEntityReport': {'channel': 'Subscriber::EntityReport_DR', 'dir': 'input'}, 
-                'ScenarioStatus': {'channel': 'Subscriber::ScenarioStatus_DR', 'dir': 'input'}, 
-                'EntityPosture': {'channel': 'Subscriber::EntityPosture_DR', 'dir': 'input'}, 
-                'FusionReport': {'channel': 'Subscriber::FusionReport_DR', 'dir': 'input'}, 
-                'AttackReport': {'channel': 'Subscriber::AttackReport_DR', 'dir': 'input'}, 
-                'AttackCommand_DR': {'channel': 'Subscriber::AttackCommand_DR', 'dir': 'input'}, 
-                }
+dds_topics ={ 
+            'AtlasFusedEntityReport': {'channel': 'Subscriber::EntityReport_DR', 'dir': 'input'}, 
+            'ScenarioStatus': {'channel': 'Subscriber::ScenarioStatus_DR', 'dir': 'input'}, 
+            'EntityPosture': {'channel': 'Subscriber::EntityPosture_DR', 'dir': 'input'}, 
+            'FusionReport': {'channel': 'Subscriber::FusionReport_DR', 'dir': 'input'}, 
+            'AttackReport': {'channel': 'Subscriber::AttackReport_DR', 'dir': 'input'}, 
+            'AttackCommand_DR': {'channel': 'Subscriber::AttackCommand_DR', 'dir': 'input'}, 
+            }
 
 file_path = os_path.dirname(os_path.realpath(__file__))
 
 def get_connector_with_name(participant_name: str):
     return rti.Connector(
     config_name="Reader_Participant_Library::"+participant_name,
-    url=file_path + "./Configs/DDS_Participant_Config.xml",
+    url=file_path + "./Types/DDS_Participant_Config.xml",
 )
 
 
@@ -97,9 +97,9 @@ class Publisher(object):
                     }
                 }
         jcommand = json.dumps(command, indent=2)
-        print(jcommand)
+        print('\n'+jcommand, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jcommand, "utf-8"), (ConfigManager.server1['IP'], int(ConfigManager.server1['PORT'])))
+        sock.sendto(bytes('\n'+jcommand, "utf-8"), (ConfigManager.Server1['IP'], int(ConfigManager.Server1['PORT'])))
 
 
     def GetEntityPosture(self):
@@ -122,9 +122,9 @@ class Publisher(object):
                 }
             }
         jcommand = json.dumps(command, indent=2)
-        print(jcommand)
+        print('\n'+jcommand, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jcommand, "utf-8"), (ConfigManager.server2['IP'], int(ConfigManager.server2['PORT'])))
+        sock.sendto(bytes('\n'+jcommand, "utf-8"), (ConfigManager.Server2['IP'], int(ConfigManager.Server2['PORT'])))
 
     def GetAtlasReport(self):
         try:
@@ -155,9 +155,9 @@ class Publisher(object):
                     }
                 }
         jreport = json.dumps(report, indent=2)
-        print(jreport)
+        print('\n'+jreport, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jreport, "utf-8"), (ConfigManager.server3['IP'], int(ConfigManager.server3['PORT'])))
+        sock.sendto(bytes('\n'+jreport, "utf-8"), (ConfigManager.Server3['IP'], int(ConfigManager.Server3['PORT'])))
 
     def GetAttackReport(self):
         try:
@@ -181,9 +181,9 @@ class Publisher(object):
                         }
                     }
         jreport = json.dumps(report, indent=2)
-        print(jreport)
+        print('\n'+jreport, end="\r")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-        sock.sendto(bytes(jreport, "utf-8"), (ConfigManager.server4['IP'], int(ConfigManager.server4['PORT'])))
+        sock.sendto(bytes('\n'+jreport, "utf-8"), (ConfigManager.Server4['IP'], int(ConfigManager.Server4['PORT'])))
 
     def start(self):
         # self.GetScenarioStatus()
