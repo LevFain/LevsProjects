@@ -10,3 +10,5 @@ Important -
 How to use:
 	1) Place any scenario file you want in the scnx folder
 	2) start "start.bat"
+	
+Comes with 4 random scenarios I chose for testings....
