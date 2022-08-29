@@ -1,0 +1,3 @@
+import scenario
+
+scenario.init()
