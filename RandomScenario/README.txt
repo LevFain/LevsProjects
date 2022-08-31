@@ -11,9 +11,10 @@ Important -
 How to use:
 	1) Place any scenario file you want in the scnx folder
 	2) start "start.bat"
-	3) type either 'start' or 'change'
+	3) type either 'start' or 'change' or 'help'
 		-start; starts the main program
 		-change; allows you to change the domainID in the BAT that will be used
+		-help; prints the applicable commands
 	
 	
 Comes with a few random scenarios I chose for testings....
