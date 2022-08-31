@@ -37,9 +37,14 @@ Set logtimestamp=_
 :make_dump
 set SIM_DESKTOP=C:\Users\VR-FORCES\Desktop\BE_LOGS
 set FILENAME=BE_6_%logtimestamp%.log
-set SCENARIO_FILE=../userData/scenarios/LabrynthPolygons.scnx
+set SCENARIO_FILE=../userData/scenarios/sensortest.scnx
 
-start /B vrfSimHLA1516e.exe -a 3106 -x 6 -F RPR_FOM_v2.0_1516-2010.xml --rprFomVersion 2.0 --rprFomRevision 2 --fomModules MAK-VRFExt-4_evolved.xml --fomModules MAK-DIGuy-4_evolved.xml --fomModules MAK-LgrControl-2_evolved.xml --fomModules MAK-VRFAggregate-3_evolved.xml --fomModules MAK-DynamicTerrain-2_evolved.xml --siteId 6 --sessionId 6 --loadPlugin MAK_DDS_Plugin.dll -n 1 --outputLogFile %SIM_DESKTOP%\Domain6\%FILENAME% --scenarioFileName "%SCENARIO_FILE%"
+start /B vrfSimHLA1516e.exe ^
+-a 3102 ^
+-x 2 ^
+--siteId 2 ^
+--sessionId 2 ^
+-F RPR_FOM_v2.0_1516-2010.xml --rprFomVersion 2.0 --rprFomRevision 2 --fomModules MAK-VRFExt-4_evolved.xml --fomModules MAK-DIGuy-4_evolved.xml --fomModules MAK-LgrControl-2_evolved.xml --fomModules MAK-VRFAggregate-3_evolved.xml --fomModules MAK-DynamicTerrain-2_evolved.xml --loadPlugin MAK_DDS_Plugin.dll -n 1 --outputLogFile %SIM_DESKTOP%\Domain6\%FILENAME% --scenarioFileName "%SCENARIO_FILE%"
 rem C:\MAK\vrforces4.7\bin64\vrfSimHLA1516e.exe -a 3021 -x 21 -F RPR_FOM_v2.0_1516-2010.xml --rprFomVersion 2.0 --rprFomRevision 2 --fomModules MAK-VRFExt-4_evolved.xml --fomModules MAK-DIGuy-4_evolved.xml --fomModules MAK-LgrControl-2_evolved.xml --fomModules MAK-VRFAggregate-3_evolved.xml --fomModules MAK-DynamicTerrain-2_evolved.xml --siteId 21 --loadPlugin MAK_DDS_Plugin.dll -n 1 --outputLogFile "%SIM_DESKTOP%\BE_Logs\Domain21\%FILENAME%" --scenarioFileName "%SCENARIO_FILE%"
 
 pause
