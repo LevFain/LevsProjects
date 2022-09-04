@@ -6,6 +6,8 @@ def init():
         val = str.lower(input())
         if val == 'start' or val == 's':
             start()
+        if val == 'create':
+            create()
         if val == 'change' or val == 'domain' or val == 'c' or val == 'd':
             change()
         if val == 'help' or val == 'h':
@@ -19,7 +21,7 @@ def init():
             print('\nInvalid input.\n')
             print('Type help or h for help\n')
             init()
-            
+
 def start():
     random.seed()
     # clear CMD screen
@@ -58,14 +60,18 @@ def start():
             # read a list of lines into data
             data = file.readlines()
         
+        #change title to new scenario
+        titleData = rndScn.split('.')
+        data[2] = f'title {titleData[0]}\n'
+        
         # print our current file that is going to be used and the new one
-        splitData = data[39].split()
-        print(f'\nYour current ScenarioFile: {splitData[1][36:]}\n')
-        print(f'New Scenario will be: {rndScn}\n')
+        splitData = data[39].split('/')
+        print(f'\nYour current ScenarioFile: {splitData[3]}')
+        print(f'New Scenario will be: {titleData[0]}\n')
         
         # change the SCENARIO_FILE to the randomly chosen one
         data[39] = f'set SCENARIO_FILE=../userData/scenarios/{rndScn}\n'
-
+        
         # write everything back
         with open('./scenarios/scenario.bat', 'w') as file:
             file.writelines(data)
@@ -84,7 +90,106 @@ def start():
         # making sure the selected scenario
         # is existent in the main scenarios folder
         # of VRF 
+        src = f'./scenarios/scnx/{scn}'
+        makDir = os.getenv('mak_vrfdir')
+        dst = f'{makDir}/userData/scenarios/'
+        shutil.copy2(src, dst)
+        
+        # read our VRF SIM BAT
+        with open('./scenarios/scenario.bat', 'r') as file:
+            # read a list of lines into data
+            data = file.readlines()
+            
+        #change title to new scenario
+        titleData = scn.split('.')
+        data[2] = f'title {titleData[0]}\n'
+        
+        # print our current file that is going to be used and the new one
+        splitData = data[39].split('/')
+        print(f'\nYour current ScenarioFile: {splitData[3]}')
+        print(f'New Scenario will be: {titleData[0]}\n')
+        
+        # change the SCENARIO_FILE to the new one
+        data[39] = f'set SCENARIO_FILE=../userData/scenarios/{scn}\n'
+        
+        # write back to bat
+        with open(f'./scenarios/scenario.bat', 'w') as file:
+            file.writelines(data)
+
+        # start the new BAT
+        print(f'Starting VRFSIM with new scenario\n')
+        os.system(f'start {scen_dir}{scen}')
+        init()        
+            
+def create():
+    random.seed()
+    # clear CMD screen
+    os.system('cls')
+    
+    # scenarios folder location and bat name
+    scen_dir = os.path.abspath("./scenarios")
+    scen = "/scenario.bat"
+    # print(scen_dir) #remove # to check if path is correct  
+            
+    # scnx files location
+    for root, dirs, files in os.walk('./scenarios/scnx'):
+        flen = len(files) -1
+
+    # this check is to prevent error if only one scenario file exists
+    if flen >= 1:
+        
+        # random number from 0 (as indexs start from 0) till (including) the amount of files
+        # in the files directory
+        random.shuffle(files)
+        rndnum = str(random.randint(0,flen))
+        
+        # random scenario chosing
+        rndScn = files[int(rndnum)]
+
+        # making sure the selected scenario
+        # is existent in the main scenarios folder
+        # of VRF            
         src = f'./scenarios/scnx/{rndScn}'
+        makDir = os.getenv('mak_vrfdir')
+        dst = f'{makDir}/userData/scenarios/'
+        shutil.copy2(src, dst)
+        
+        # read our VRF SIM BAT
+        with open('./scenarios/scenario.bat', 'r') as file:
+            # read a list of lines into data
+            data = file.readlines()
+        
+        #change title to new scenario
+        titleData = rndScn.split('.')
+        data[2] = f'title {titleData[0]}\n'
+        
+        # print our current file that is going to be used and the new one
+        splitData = data[39].split()
+        print(f'\nYour current ScenarioFile: {splitData[1][36:]}\n')
+        print(f'New Scenario will be: {titleData[0]}\n')
+        
+        # change the SCENARIO_FILE to the randomly chosen one
+        data[39] = f'set SCENARIO_FILE=../userData/scenarios/{rndScn}\n'
+        
+        # write everything back
+        with open(f'./scenarios/{titleData[0]}.bat', 'w') as file:
+            file.writelines(data)
+
+        # now start the new BAT
+        print(f'Starting VRFSIM with new scenario\n')
+        os.system(f'start {scen_dir}/{titleData[0]}.bat')
+        init()
+        
+    # if only one scenario file exists in the scnx folder it will be the only one chosen to start with
+    else:
+        
+        # assigning the scenario to a var
+        scn = files[0]
+        
+        # making sure the selected scenario
+        # is existent in the main scenarios folder
+        # of VRF 
+        src = f'./scenarios/scnx/{scn}'
         makDir = os.getenv('mak_vrfdir')
         dst = f'{makDir}/userData/scenarios/'
         shutil.copy2(src, dst)
@@ -97,22 +202,26 @@ def start():
         # print our current file that is going to be used and the new one
         splitData = data[39].split()
         print(f'\nYour current ScenarioFile: {splitData[1][36:]}\n')
-        print(f'New Scenario will be: {rndScn}\n')
+        print(f'New Scenario will be: {scn}\n')
         
         # change the SCENARIO_FILE to the new one
         data[39] = f'set SCENARIO_FILE=../userData/scenarios/{scn}\n'
 
+        #change title to new scenario
+        titleData = scn.split('.')
+        data[2] = f'title {titleData[0]}\n'
+        
         # write back to bat
-        with open('./scenarios/scenario.bat', 'w') as file:
+        with open(f'./scenarios/{scn}.bat', 'w') as file:
             file.writelines(data)
 
         # start the new BAT
-        print(f'Starting VRFSIM with {rndScn}\n')
-        os.system(f'start {scen_dir}{scen}')
+        print(f'Starting VRFSIM with {scn}\n')
+        os.system(f'start {scen_dir}/{scn}.bat')
         init()
             
 def change():
-    
+    os.system('cls')
     # read our VRF SIM BAT
     with open('./scenarios/scenario.bat', 'r') as file:
         # read a list of lines into data
@@ -139,7 +248,8 @@ def change():
         
         if len(newDom) == 1:
             # if new domain is single digit
-            
+
+            data[37] = f'set DOMAIN={newDom}\n'
             data[42] = f'-a 310{newDom} ^\n'
             data[43] = f'-x {newDom} ^\n'
             data[44] = f'--siteId {newDom} ^\n'
@@ -156,7 +266,8 @@ def change():
                 os.system('cls')
                 # if new domain is two digits
                 
-                data[42] = f'-a 310{newDom} ^\n'
+                data[37] = f'set DOMAIN={newDom}\n'
+                data[42] = f'-a 31{newDom} ^\n'
                 data[43] = f'-x {newDom} ^\n'
                 data[44] = f'--siteId {newDom} ^\n'
                 data[45] = f'--sessionId {newDom} ^\n' 
@@ -169,6 +280,7 @@ def change():
             else:
                 os.system('cls')
                 # if new domain in more than two digit
+                data[37] = f'set DOMAIN={newDom}\n'
                 data[42] = f'-a 3{newDom} ^\n'
                 data[43] = f'-x {newDom} ^\n'
                 data[44] = f'--siteId {newDom} ^\n'
@@ -190,3 +302,5 @@ def change():
         file.writelines(data)
     
     init()
+    
+init()
