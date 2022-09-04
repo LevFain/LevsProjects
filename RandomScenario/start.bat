@@ -1,3 +1,3 @@
 @echo OFF
-python main.py
+python scenario.py
 pause
